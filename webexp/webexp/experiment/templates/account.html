@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block body %}
+<script>
+    function submitForm() {
+        document.getElementById("accountForm").submit();
+        setTimeout(() => {
+            document.getElementById("submitButton").disabled = false;
+            }, 1000);
+    }
+</script>
+
+<div class="main">
+    <p style="width: 800px;">
+        Zde uveďte číslo svého bankovního účtu pro zaslání odměny (číslo účtu/kód banky):
+    </p>      
+    <form method="POST" id="accountForm">
+        {% csrf_token %}
+        <input type="text" name="account" maxlength="50" autofocus required>
+        <input type="submit" name="continue" value="Pokračovat" id="submitButton" onclick="this.disabled=true; submitForm();">
+    </form>
+    <p style="height: 100px;">  
+        {{ exception }}
+        <br>
+        {% if exception %}
+        Pokud nemůžete zadat číslo bankovního účtu, vyplňte výše alespoň e-mail, na který vás budeme moci kontaktovat pro zaslání vaší výhry.
+        {% endif %}
+    </p>  
+</div>
+{% endblock %}
+
+

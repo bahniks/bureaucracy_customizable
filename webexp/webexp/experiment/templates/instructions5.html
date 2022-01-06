@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block body %}
+    <div class="main">
+        <p>
+            Níže vidíte, jak vypadá obrazovka v průběhu úkolu spolu s popisky jednotlivých prvků.
+            <br><br>
+            Až si obrázek prohlédnete, klikněte na “Pokračovat”.        
+        </p>      
+        {% load static %}
+        <img src="{% static "experiment/screen1.png" %}" alt="Example screen 1" width="800px">
+        <form method="POST">
+            {% csrf_token %}
+            <input type="submit" name="continue" value="Pokračovat" onclick="this.disabled=true; this.form.submit();">
+        </form>
+    </div>
+{% endblock %}
+
+

@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block body %}
+    <div class="main wide">
+        <h1>Získávání bodů (zopakování)</h1>
+        <p>Výše příspěvku, který PLESS odvede na charitu, závisí na tom, zda budete dodržovat pravidlo a obrázky třídit dle BARVY. Příspěvek má na začátku hodnotu 2000 bodů. Pokud obrázek zatřídíte k jiné barvě, než je barva obrázku, příspěvek se sníží o 200 bodů. Pokud obrázek zatřídíte ke stejné barvě, výše příspěvku pro charitu se nezmění.<br>
+        (Je možné se dostat i do záporných hodnot.)</p>
+        <p>Vaše odměna je na začátku 0 bodů. Za každý zatříděný obrázek získáte 3 body, bez ohledu na to k jaké barvě nebo tvaru ho zatřídíte.</p>
+        <p>Pokud obrázek s odměnou nabídnutou počítačovým programem zatřídíte dle TVARU, získáte pro sebe navíc počet bodů odpovídající číslu vepsanému v obrázku. Během úlohy tak můžete svoji odměnu ještě dále zvýšit, pokud v takovém případě porušíte pravidlo o zařazování dle BARVY a tyto obrázky místo toho zatřídíte dle TVARU.<br> 
+        Pokud budete chtít takto získat pro sebe body navíc a zatřídíte obrázek v rozporu s pravidlem, příspěvek na charitu se sníží o 200 bodů. Samozřejmě můžete nabídnutou odměnu navíc ignorovat a obrázek zatřídit k odpovídající barvě.</p>
+        <p>I nyní si můžete v úloze kdykoli udělat přestávku stisknutím tlačítka MEZERNÍK, nicméně tentokrát <b>tuto možnost můžete využít maximálně 3x</b>. Přestávka také nesmí být delší než 15 minut.</p>
+        <p>Poté, co si budete jisti, že instrukcím rozumíte, klikněte na “Pokračovat” a ukazováček, prostředníček a prsteníček položte na klávesy “J”, “K”, a “L”.</p>
+        <p>Pozor, po kliknutí na “Pokračovat” úloha začne po krátkém odpočtu a na zatřídění každého obrázku máte jen několik vteřin – dokud obrázek neopustí obrazovku.</p>
+        <br><br>                      
+        <form method="POST">
+            {% csrf_token %}
+            <input type="submit" name="continue" value="Pokračovat" onclick="this.disabled=true; this.form.submit();">
+        </form>
+    </div>
+{% endblock %}
+
+

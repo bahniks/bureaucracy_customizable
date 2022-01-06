@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% block body %}
+    <div class="main wide">
+        <p>
+            <p>Vítejte v on-line studii pořádané ve spolupráci s Fakultou podnikohospodářskou Vysoké školy ekonomické v Praze.</p>
+            <p><b>Vaším úkolem bude třídit podle barvy obrázky pohybující se z jedné strany obrazovky na druhou. V tomto úkolu můžete získat peníze pro sebe a vámi vybranou charitu.</b></p>
+            <p>Během studie vám nehrozí žádné riziko či nepohodlí.</p>
+            <p>Během studie vás požádáme o číslo bankovního účtu kvůli vyplacení odměny – <b>připravte si prosím číslo svého účtu ještě teď</b>, před začátkem samotné studie. Číslo účtu bude odděleno od vašich ostatních odpovědí ve studii a dále budeme pracovat pouze s takto anonymizovanými daty. Anonymizovaná data neobsahující žádné osobní údaje mohou být v souladu s principy otevřené vědy zveřejněna on-line.</p>
+            <p>Účast ve studii je zcela dobrovolná a lze ji kdykoliv ukončit zavřením okna prohlížeče.</p> 
+            <p>Celá studie by měla trvat asi 15 minut. Spusťte ji v klidném prostředí, kde vás nebude nic rušit, a během trvání studie se na ni prosím plně soustřeďte. V některých místech lze studii na krátkou dobu pozastavit. <b>Po 15 minutách bez aktivity se studie automaticky ukončí.</b></p>
+            <p>Pro fungování studie musíte mít v prohlížeči povoleny cookies. Pokud nevíte, jak cookies povolit či zakázat, s největší pravděpodobností je máte povoleny.<br>
+            Studie se nelze zúčastnit z mobilu nebo tabletu a nefunguje v prohlížeči Internet Explorer. Studie musí běžet v okně s dostatečným rozlišením (min. 1000x700px). Tyto požadavky jsou automaticky zkontrolovány před spuštěním.<br>
+            Studie nemusí správně fungovat ve starších verzích internetových prohlížečů. Pokud jste vypnuli automatické aktualizace prohlížeče, aktualizujte před spuštěním experimentu svůj internetový prohlížeč.</p>
+            <p><b>Během studie nezavírejte okno se studií a neklikejte na tlačítka prohlížeče “Zpět” a “Obnovit”.</b> Kliknutí na ně může způsobit neočekávané chování studie a její ukončení.</p> 
+            <p>Doporučujeme vám zapnout si studii na celou obrazovku pomocí tlačítka F11.</p>
+            <p>V případě, že se objeví technický problém a/nebo ve studii nebude možné pokračovat, napište nám na experiment@pless.cz.</p> 
+            <p>Kliknutím na tlačítko “Pokračovat” vyjadřujete svůj souhlas s účastí za podmínek uvedených výše a spustíte studii.</p>                                                         
+        </p>      
+        <form method="POST">
+            {% csrf_token %}
+            <input type="submit" name="continue" value="Pokračovat" id="continue" disabled onclick="this.disabled=true; this.form.submit();">
+        </form>
+        <p id="problem" height="200px" class="horizontal-center">
+        </p>
+    </div>
+    <script>
+        function detectMobile() {
+            const toMatch = [
+                /Android/i,
+                /webOS/i,
+                /iPhone/i,
+                /iPad/i,
+                /iPod/i,
+                /BlackBerry/i,
+                /Windows Phone/i
+            ];
+            return toMatch.some((toMatchItem) => {
+                return navigator.userAgent.match(toMatchItem);
+            });
+        }
+
+        function smallScreen() {
+            return ( ( window.innerWidth <= 1000 ) || ( window.innerHeight <= 700 ) );
+        }
+
+        function isIE() {
+            var ua = window.navigator.userAgent;
+            return /MSIE|Trident/.test(ua);
+        }
+        
+        if(detectMobile()) {
+            document.getElementById("problem").innerHTML = "Experiment nelze spustit na mobilním zařízení! Odkaz z pozvánky spusťte na počítači.";
+        } else if(smallScreen()) {
+            document.getElementById("problem").innerHTML = "Experiment vyžaduje velikost okna alespoň 1000x700 pixelů! Zvětšete okno nebo spusťte odkaz z pozvánky na zařízení s větším rozlišením. Je možné také použít menší přiblížení pomocí klávesové zkratky 'Ctrl' + '-'.";
+            alert("Experiment vyžaduje velikost okna alespoň 1000x700 pixelů! Zvětšete okno nebo spusťte odkaz z pozvánky na zařízení s větším rozlišením. Je možné také použít menší přiblížení pomocí klávesové zkratky 'Ctrl' + '-'.");
+        } else if(isIE()) {
+            document.getElementById("problem").innerHTML = "Experiment nelze spustit v prohlížeči Internet Explorer! Odkaz z pozvánky spusťte v jiném prohlížeči.";
+        } else {
+            document.getElementById("continue").disabled = false;
+        }
+
+        window.addEventListener("resize", function () {
+            if(!smallScreen()) {
+                document.getElementById("continue").disabled = false;
+            }
+        });
+
+    </script>
+{% endblock %}
+
+

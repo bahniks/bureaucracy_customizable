@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block body %}
+    <div class="main">
+        <p> 
+            {% if charity_total < 0 %}
+                Vaše celková odměna za tuto studii je {{ reward_total }} Kč. Charitě {{ charity }} jste ztratil(a) {{ charity_absolute }} Kč.
+            {% else %}
+                Vaše celková odměna za tuto studii je {{ reward_total }} Kč. Pro charitu {{ charity }} jste získal(a) {{ charity_absolute }} Kč.
+            {% endif %}
+        </p>
+        <p>Vaše odměna bude během několik pracovních dnů zaslána na číslo účtu, jež jste uvedli. Pokud jste místo čísla účtu uvedli pouze e-mailovou adresu, budeme vás co nejdříve kontaktovat ohledně vyplacení odměny.</p>
+        <p>Výsledky experimentu budou volně dostupné na stránkách PLESS a CEBEX, krátce po vyhodnocení dat a publikaci výsledků. Žádáme vás, abyste nesdělovali detaily této studie možným účastníkům, aby jejich volby a odpovědi nebyly ovlivněny a znehodnoceny.</p>
+        <p>Toto je konec experimentu. Děkujeme za vaši účast!</p><br>
+        <p><em>Laboratoř CEBEX/PLESS</em></p>
+        <br><br>
+        <p>Toto okno již můžete zavřít.</p>   
+    </div>
+{% endblock %}
+
+
