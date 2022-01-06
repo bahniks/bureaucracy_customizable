@@ -1,0 +1,8 @@
+The contribution you will earn for the charity depends on whether you will follow the rule to sort the objects according to color. The initial contribution is 2000 points and it decreases by 200 points whenever you do not sort the object according to color. If you sort the object correctly according to color, the contribution does not change. It is possible to end in negative values.
+
+Your initial reward is 0 points. You will earn 3 points for each sorted object, regardless to which color and shape you will sort it.
+
+Some objects come with a number written in them. If you sort these objects according to their shape, you will earn the number of points corresponding to the number.
+
+After you are certain that you understand the instructions, press Continue and prepare your fingers on the "1", "2", and "3" keys.
+The task will begin after a short countdown. You have a few seconds to sort each object - until the object does not move out from the screen.
