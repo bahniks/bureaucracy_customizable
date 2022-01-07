@@ -53,7 +53,7 @@ Thank you for your participation!
 
 # Task
 #-----------------------------------------------------------------------------------------------------------------
-NUMBER_OF_OBJECTS = 100
+NUMBER_OF_OBJECTS = 5
 CHARITY_ENDOWMENT = 2000
 BRIBE_PROBABILITY = 0.225
 SORTING_REWARD = 3

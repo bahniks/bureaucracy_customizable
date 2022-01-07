@@ -7,7 +7,7 @@ import random
 
 from common import ExperimentFrame
 from gui import GUI
-from constants import CHARITY, CHARITIES, INSTRUCTIONS_CHARITIES
+from settings import CHARITY, CHARITIES, INSTRUCTIONS_CHARITIES
 
 
 
@@ -43,7 +43,7 @@ class Charity(ExperimentFrame):
         self.rowconfigure(9, weight = 1)
         self.rowconfigure(10, weight = 1)
 
-        self.next = ttk.Button(self, text = "Pokračovat", command = self.nextFun)
+        self.next = ttk.Button(self, text = "Continue", command = self.nextFun)
         self.next["state"] = "disabled"
         self.next.grid(row = 9, column = 0, columnspan = 4, pady = 15)
 
