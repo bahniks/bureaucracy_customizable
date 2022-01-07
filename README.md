@@ -12,3 +12,7 @@ The software can be used to administer a task used to model the decision to take
  Data save to folder *Data*.  
  You can extract the data to a long format by running *extract_data.pyw*.  
  It is also possible to extract data from multiple data folder this was (e.g. from folder from different stations).  
+
+ # Help
+ If you want any help with the program, don't hesitate to contant me at: bahniks@seznam.cz
+ You can also find more about me and my work at [my website](http://bahniks.com/).
