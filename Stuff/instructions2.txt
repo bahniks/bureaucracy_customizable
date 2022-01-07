@@ -1,2 +1,2 @@
-Níže vidíte, jak vypadá obrazovka v průběhu úkolu spolu s popisky jednotlivých prvků.
-Až si obrázek prohlédnete, klikněte na Pokračovat.
+Below, you can see how the screen looks like during the task.
+Click on the button below to continue.

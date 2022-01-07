@@ -10,7 +10,8 @@ from gui import GUI
 from dishonesty import Dishonesty
 from common import InstructionsFrame, ScreenshotInstructions
 from charity import Charity
-from constants import CHARITY, WELCOME_TEXT, CLOSING_TEXT, INSTRUCTIONS
+from settings import CHARITY, WELCOME_TEXT, CLOSING_TEXT, INSTRUCTIONS
+
 
 Intro = (InstructionsFrame, {"text": WELCOME_TEXT})
 ending = (InstructionsFrame, {"text": CLOSING_TEXT})

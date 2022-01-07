@@ -10,37 +10,16 @@ import os
 from common import ExperimentFrame, InstructionsFrame
 from gui import GUI
 from charity import Charity
+from settings import NUMBER_OF_OBJECTS, CHARITY_ENDOWMENT, BRIBE_PROBABILITY, SORTING_REWARD, BRIBE_SIZES
+from settings import INCORRECT_SORTING_PENALTY, TIME_BETWEEN_OBJECTS, OBJECT_SPEED
+from settings import PAUSE_AFTER_PUNISHMENT, PUNISHMENT_TEXT, PUNISHMENT, PUNISHMENT_PROBABILITY, PUNISHMENT_SIZE
+from settings import GROUP
 
 
-
-group = random.sample([(0.01, 40), (0.01, 400), (0.01, "end"),
-                       (0.05, 40), (0.05, 400), (0.05, "end"),
-                       (0.25, 40), (0.25, 400), (0.25, "end"),
-                       (0, "control")], 1)
-group = group[0]
-probability = group[0]
-punishment = group[1]
-
-if punishment == "end":
-    size = "úloha bude ukončena a vám i charitě zůstane vaše stávající bodová odměna"
-else:
-    size = "ztratíte {} bodů ze své odměny".format(punishment)
-
-punishmentInstructions = "V tomto případě je nicméně pravděpodobnost {} %, že porušení pravidla bude odhaleno a vy za daný obrázek body navíc neobdržíte a kromě toho {}.".format(int(probability*100), size) if punishment != "control" else ""
-
-punishmentText = """Bylo zaznamenáno zatřídění podle tvaru místo podle barvy a bylo Vám strženo {} bodů.
-Pravděpodobnost zaznamenání zatřídění v rozporu s pravidly je {} %.
-Úloha bude znovu pokračovat po odečtu.
-""".format(punishment, probability*100)
-
-if punishment == "end":
-    punishmentText = "Bylo zaznamenáno zatřídění podle tvaru místo podle barvy, což znamená, že úloha je ukončena. Vy i vybraná charita si ponecháváte dosud získané body."
-
-
-
-
-
-        
+if PUNISHMENT:
+    probability = PUNISHMENT_PROBABILITY
+    punishment = PUNISHMENT_SIZE    
+    punishmentText = PUNISHMENT_TEXT.format(size = punishment, probability = probability*100)
 
 
 class DishonestyInstructions(InstructionsFrame):
@@ -84,15 +63,15 @@ class Dishonesty(ExperimentFrame):
 
         #######################
         # adjustable parameters
-        self.maxObjects = 200 # adjust for testing
-        self.charityBeginning = 2000
-        self.spacingTime = 2.5 
-        self.pauseTime = 12 # pause after punishment
-        self.speed = 615
-        self.bribes = [i*10 for i in range(4, 19)]
-        self.bribeProbability = 0.225
-        self.sortReward = 3
-        self.wrongPenalty = 200
+        self.maxObjects = NUMBER_OF_OBJECTS
+        self.charityBeginning = CHARITY_ENDOWMENT
+        self.spacingTime = TIME_BETWEEN_OBJECTS
+        self.pauseTime = PAUSE_AFTER_PUNISHMENT
+        self.speed = OBJECT_SPEED
+        self.bribes = BRIBE_SIZES
+        self.bribeProbability = BRIBE_PROBABILITY
+        self.sortReward = SORTING_REWARD
+        self.wrongPenalty = INCORRECT_SORTING_PENALTY
         #######################
 
         self.width = self.root.screenwidth
@@ -115,8 +94,8 @@ class Dishonesty(ExperimentFrame):
         self.rewardVar = StringVar()
         self.numberVar = StringVar()
 
-        self.charityText = "Charitě: {}"
-        self.rewardText = "Odměna: {}"
+        self.charityText = "Charity: {}"
+        self.rewardText = "Reward: {}"
         self.numberText = "{}/" + str(self.maxObjects)
 
         self.charity = ttk.Label(self, textvariable = self.charityVar, font = "helvetica 30",
@@ -152,9 +131,12 @@ class Dishonesty(ExperimentFrame):
         self.columnconfigure(0, weight = 1)
         self.rowconfigure(1, weight = 1)
         
-        self.root.bind("1", lambda e: self.response(1))
-        self.root.bind("2", lambda e: self.response(2))
-        self.root.bind("3", lambda e: self.response(3))
+        self.root.bind("J", lambda e: self.response(1))
+        self.root.bind("K", lambda e: self.response(2))
+        self.root.bind("L", lambda e: self.response(3))
+        self.root.bind("j", lambda e: self.response(1))
+        self.root.bind("k", lambda e: self.response(2))
+        self.root.bind("l", lambda e: self.response(3))
 
         self.paused = True
         self.pause = self.pauseTime - 3
@@ -192,8 +174,7 @@ class Dishonesty(ExperimentFrame):
         responseShape = self.shapes[number-1]
 
         if shapeRight and not colorRight and random.random() < probability and bribe:
-            if punishment != "end" and punishment != "control":
-                self.rewardTotal -= punishment
+            self.rewardTotal -= punishment
             self.rewardTotal -= bribe
             self.paused = True
             self.punished = 1
@@ -214,11 +195,9 @@ class Dishonesty(ExperimentFrame):
         self.time = perf_counter()
 
 
-    def punishmentUpdate(self):
+    def countdown(self):
         if self.pause < self.pauseTime - 3 and not self.punishmentTextObject:
             self.punishmentTextObject = self.middle.create_text((self.width/2, 125), text = punishmentText, font = "helvetica 20", justify = "center")
-        elif self.pause > self.pauseTime - 3 and punishment == "end" and self.punished:
-            return True
         elif self.pauseTime - 2 > self.pause > self.pauseTime - 3:
             if not self.punishmentTextObject:
                 self.punishmentTextObject = self.middle.create_text((self.width/2, 125), text = "3", font = "helvetica 35", justify = "center")
@@ -254,7 +233,7 @@ class Dishonesty(ExperimentFrame):
                 timer += dif
             else:
                 self.pause += dif
-                end = self.punishmentUpdate()
+                end = self.countdown()
             self.root.update()
             if timer > self.spacingTime and objects < self.maxObjects:
                 self.createObject()
@@ -287,7 +266,7 @@ class Dishonesty(ExperimentFrame):
             elif self.shapes[i] == "circle":
                 idnum = self.down.create_oval((x0, y0, x2, y1), fill = color, outline = color)
             self.pots.append(idnum)
-            self.down.create_text((x1, y1+40), text = str(i+1), font = "helvetica 35")
+            self.down.create_text((x1, y1+40), text = ["J", "K", "L"][i], font = "helvetica 35")
 
 
     def changePotsColors(self):
@@ -361,13 +340,5 @@ class Dishonesty(ExperimentFrame):
 
 if __name__ == "__main__":
     os.chdir(os.path.dirname(os.getcwd()))
-    GUI([Charity,
-         DishonestyInstructions,
-         DishonestyInstructions2,
-         DishonestyInstructions3,
-         DishonestyInstructions4,
-         DishonestyInstructions5,
-         DishonestyInstructions6,
-         DishonestyInstructions7,
-         Dishonesty])
+    GUI([Dishonesty])
 

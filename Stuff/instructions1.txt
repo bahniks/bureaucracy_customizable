@@ -2,7 +2,7 @@ In this task you can earn or lose points for yourself and the selected charity.
 
 Your task is to sort objects moving on the screen according to their COLOR.
 
-Each object can be sorted by pressing a "1", "2", or "3" key to one color and one shape. You will be able to see which color and shape are assigned each key in the bottom part of the screen.
+Each object can be sorted by pressing a "J", "K", or "L" key to one color and one shape. You will be able to see which color and shape are assigned each key in the bottom part of the screen.
 
 The objects can have blue, orange, or yellow color and circle, triangle, or square shape.
 Beware that the assignment of keys to colors and shapes changes after each object.

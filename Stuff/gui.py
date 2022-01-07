@@ -6,7 +6,7 @@ from collections import defaultdict
 
 import os
 
-from constants import TESTING, SCREENWIDTH, SCREENHEIGHT
+from settings import TESTING, SCREENWIDTH, SCREENHEIGHT
 
 
 class GUI(Tk):

@@ -4,5 +4,5 @@ Your initial reward is 0 points. You will earn 3 points for each sorted object, 
 
 Some objects come with a number written in them. If you sort these objects according to their shape, you will earn the number of points corresponding to the number.
 
-After you are certain that you understand the instructions, press Continue and prepare your fingers on the "1", "2", and "3" keys.
+After you are certain that you understand the instructions, press Continue and prepare your fingers on the "J", "K", and "L" keys.
 The task will begin after a short countdown. You have a few seconds to sort each object - until the object does not move out from the screen.
