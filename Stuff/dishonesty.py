@@ -334,8 +334,10 @@ class Dishonesty(ExperimentFrame):
     def write(self):
         for order, line in enumerate(self.responses, 1):
             begin = [self.id, order]
-            end = [self.charityTotal, self.rewardTotal, probability, punishment]
+            end = [self.charityTotal, self.rewardTotal, probability, punishment, GROUP]
             self.file.write("\t".join(map(str, begin + line + end)) + "\n")
+
+        self.file.write("\nWinnings\n" + "Charity: " + str(self.charityTotal) + "\nReward: " + str(self.rewardTotal))
 
 
 if __name__ == "__main__":

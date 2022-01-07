@@ -49,7 +49,6 @@ class GUI(Tk):
         
 
     def nextFrame(self):
-        self.file.write("time: " + str(time()) + "\n")
         self.count += 1
         if self.count >= len(self.order):
             self.destroy()
